@@ -12,11 +12,11 @@ public class Class22projectApplication {
 		SpringApplication.run(Class22projectApplication.class, args);
 	}
 
-
-	@Bean
-	public AppConfig appConfig() {
-		return new AppConfig("ro", "ron");
-	}
+//
+//	@Bean
+//	public AppConfig appConfig() {
+//		return new AppConfig("ro", "ron");
+//	}
 
 
 }
