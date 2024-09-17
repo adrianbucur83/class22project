@@ -1,24 +1,20 @@
 package com.siit.class22project.model;
 
+import lombok.Data;
 
+@Data
 public class Product {
 
     private String name;
     private double price;
+    private double profit;
 
-    public String getName() {
-        return name;
+    public ProductReturnDto toReturnDto() {
+        ProductReturnDto productReturnDto = new ProductReturnDto();
+        productReturnDto.setName(name);
+        productReturnDto.setPrice(price);
+        return productReturnDto;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 }
