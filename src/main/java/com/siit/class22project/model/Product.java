@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class Product {
 
+    private Long id;
     private String name;
     private double price;
     private double profit;
@@ -13,6 +14,7 @@ public class Product {
         ProductReturnDto productReturnDto = new ProductReturnDto();
         productReturnDto.setName(name);
         productReturnDto.setPrice(price);
+        productReturnDto.setId(this.id);
         return productReturnDto;
     }
 

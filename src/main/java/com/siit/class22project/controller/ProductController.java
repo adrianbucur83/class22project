@@ -8,11 +8,16 @@ import com.siit.class22project.model.ProductReturnDto;
 import com.siit.class22project.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+//@Controller
+//@ResponseBody pe fiecare metoda
 @RequestMapping("/api/v2")
 @RequiredArgsConstructor
 public class ProductController {
@@ -32,17 +37,36 @@ public class ProductController {
         product.setName("Table");
         product.setPrice(10.0);
         product.setProfit(1000);
-        return List.of(product.toReturnDto()) ;
+        return List.of(product.toReturnDto());
+    }
+
+    @GetMapping("/products/{productId}")
+    public ProductReturnDto getProducts(@PathVariable Long productId) {
+        Product product = new Product();
+        product.setId(1L);
+        product.setName("Table");
+        product.setPrice(10.0);
+        product.setProfit(1000);
+        Product product2 = new Product();
+        product2.setId(2L);
+        product2.setName("Chair");
+        product2.setPrice(20.0);
+        product2.setProfit(2);
+        List<ProductReturnDto> productList = List.of(product.toReturnDto(), product2.toReturnDto());
+
+        return productList.
+                stream()
+                .filter(productDto -> productDto.getId() == productId)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Product not found"));
     }
 
     @PostMapping("/products")
     @ResponseStatus(HttpStatus.CREATED)
-    public boolean createProduct(@RequestBody ProductCreateDto productCreateDto, @RequestParam boolean overwriteExistingProduct) {
+    public ResponseEntity<Boolean> createProduct(@RequestBody ProductCreateDto productCreateDto, @RequestParam boolean overwriteExistingProduct) {
         productService.createProduct(productCreateDto, overwriteExistingProduct);
-        return true;
+        return new ResponseEntity<>(Boolean.TRUE, HttpStatus.CREATED);
     }
-
-
 
 
 }
