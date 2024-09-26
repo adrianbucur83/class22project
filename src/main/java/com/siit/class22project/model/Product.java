@@ -16,6 +16,7 @@ public class Product {
     private double price;
     private double profit;
 
+
     public ProductReturnDto toReturnDto() {
         ProductReturnDto productReturnDto = new ProductReturnDto();
         productReturnDto.setName(name);
