@@ -13,19 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@Controller
-//@ResponseBody pe fiecare metoda
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class ProductController {
 
     private final AppConfig appConfig;
     private final ProductService productService;
 
-    @GetMapping("/")
-    public String index(@RequestParam String name) {
-        return "You have been hacked " + name +
-                " !!!! Damn, do some stuff on your pc, the content is really boring";
-    }
 
     @GetMapping("/products")
     public List<ProductReturnDto> getProducts() {
