@@ -17,6 +17,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/v3/api-docs, /v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**")
+                            .permitAll()
                         .requestMatchers("/api/**")
                             .permitAll()
                         .requestMatchers("/mvc/**")
@@ -31,6 +33,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return new BCryptPasswordEncoder();
     }
 
