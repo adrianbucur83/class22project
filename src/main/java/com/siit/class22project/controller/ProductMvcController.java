@@ -1,11 +1,11 @@
 package com.siit.class22project.controller;
 
-import com.siit.class22project.model.Product;
-import com.siit.class22project.model.ProductCreateDto;
 import com.siit.class22project.model.ProductReturnDto;
 import com.siit.class22project.model.ProductUpdateDto;
+import com.siit.class22project.service.ExchangeRateService;
 import com.siit.class22project.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +18,12 @@ import java.util.List;
 public class ProductMvcController {
 
     private final ProductService productService;
+    private final ExchangeRateService exchangeRateService;
 
     @GetMapping
     public String getProducts(Model model) {
-        List<ProductReturnDto> productList = productService.getProducts();
+        List<ProductReturnDto> productList = productService.getProducts(Pageable.ofSize(100));
+        model.addAttribute("exchangeRate", exchangeRateService.getExchangeRate());
         model.addAttribute("productList", productList);
         return "products";
     }

@@ -6,6 +6,7 @@ import com.siit.class22project.model.ProductReturnDto;
 import com.siit.class22project.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,8 @@ public class ProductController {
 
 
     @GetMapping("/products")
-    public List<ProductReturnDto> getProducts() {
-        return productService.getProducts();
+    public List<ProductReturnDto> getProducts(Pageable pageable) {
+        return productService.getProducts(pageable);
     }
 
     @GetMapping("/products/byName")
