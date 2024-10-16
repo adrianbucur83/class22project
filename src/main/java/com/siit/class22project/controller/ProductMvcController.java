@@ -1,5 +1,6 @@
 package com.siit.class22project.controller;
 
+import com.siit.class22project.model.ProductCreateDto;
 import com.siit.class22project.model.ProductReturnDto;
 import com.siit.class22project.model.ProductUpdateDto;
 import com.siit.class22project.service.ExchangeRateService;
@@ -36,7 +37,9 @@ public class ProductMvcController {
 
     @GetMapping("/update")
     public String updateView(@RequestParam Long id, Model model) {
-        model.addAttribute("productUpdateDto", new ProductUpdateDto());
+        ProductUpdateDto productUpdateDto = new ProductUpdateDto();
+        productUpdateDto.setId(id);
+        model.addAttribute("productUpdateDto", productUpdateDto);
         return "update";
     }
 
@@ -45,6 +48,19 @@ public class ProductMvcController {
         model.addAttribute("productUpdateDto", productUpdateDto);
         productService.updateProduct(productUpdateDto);
         return "redirect:/mvc";
+    }
+
+    @GetMapping("/create")
+    public String createView(Model model) {
+        model.addAttribute("productCreateDto", new ProductCreateDto());
+        return "create";  // Return the view to display the form
+    }
+
+    // Method to handle the creation of a new product
+    @PostMapping("/createProduct")
+    public String createProduct(@ModelAttribute ProductCreateDto productCreateDto, Model model) {
+        productService.createProduct(productCreateDto);  // Service method to create a product
+        return "redirect:/mvc";  // Redirect back to the product list
     }
 
 }

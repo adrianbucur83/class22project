@@ -17,12 +17,10 @@
 </head>
 <body>
 
-<h2>Curs bnr, <span th:text="${exchangeRate}"/></h2>
 
-
-<p>
+<h2>
      List of products
-</p>
+</h2>
 
 <div id="content"></div>
 
@@ -42,8 +40,13 @@
             <td> <a href="products.html" th:href="@{/mvc/update(id=${product.id})}">Update</a></td>
             <td> <a href="products.html" th:href="@{/mvc/delete(id=${product.id})}">Delete</a></td>
         </tr>
-        <table>
+    </table>
 </div>
+
+<p><a href="#" th:href="@{/mvc/create}" class="btn btn-primary">Create Product</a></p>
+
+<br/>
+<p>Curs bnr pe www.cursbnr.ro: <span th:text="${exchangeRate}"/></p>
 
 </body>
 
